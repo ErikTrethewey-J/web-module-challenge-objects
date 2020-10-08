@@ -1,7 +1,7 @@
 ///////////////Menu Items (MVP)///////////////////
 
 const latte = { name: "Cafe Latte", price: 4, category: "Drinks" };
-const burger = { name: "Burger", price: 18, category: "Lunch" };
+// const burger = { name: "Burger", price: 18, category: "Lunch" };
 const breakfastBurrito = {
   name: "Breakfast Burrito",
   price: 16,
@@ -12,7 +12,7 @@ const breakfastBurrito = {
 
 function createMenuItem(name, cost, category) {
   /* Code here */
-  return `name: ${name}, price: ${cost}, category: ${category}`;
+  return { name, cost, category };
 }
 console.log(createMenuItem("Taco", 4, "Lunch"));
 /* Task 1b: use your function to create 3 more menu items. You may add any items to the menu that you'd like */
@@ -30,6 +30,19 @@ and should return a number.
 
 For example, burger.discount("teacher") would return 13.5 and burger.discount("public") would return 16.2*/
 
+const burger = {
+  name: "Burger",
+  price: 18,
+  category: "Lunch",
+  discount: function (discount) {
+    if (discount === "Teacher" || discount === "Student") {
+      return this.price - this.price * 0.25 + "is your new Price";
+    } else if (discount === "Public") {
+      return this.price - this.price * 0.1 + " is your new Price";
+    }
+  },
+};
+console.log(burger.discount("Public"));
 ///////////////Reviews (MVP)///////////////////
 
 const reviews = [
@@ -73,11 +86,18 @@ const reviews = [
 ];
 
 /* Task 3: Console.log just Julius' feedback */
-
+console.log(reviews[5].feedback);
 /* Task 4: Add a new rating with your (fictitious) opinions of the restaurant in the same format as the reviews above. */
+reviews.push({
+  name: "Erik",
+  rating: 10,
+  feedback: "I am writing a review, blah, blah, blah.",
+});
+/* Task 5: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"*/
 
-/* Task 5: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
-
+reviews[7].feedback =
+  "this place is chill with really cool people, great for getting work done on weekdays";
+console.log(reviews[7].feedback);
 /*  Task 6: Write a function to return a review based on the index of the review in the array.
 
  Your function should take two arguments:
@@ -90,10 +110,16 @@ and should return a string in the format `{name} gave the restaurant a {rating},
  * For example, if getReviewByIndex is invoked with reviews and the number 0
  * it will return `Daniela gave the restaurant a 5 star review and their feedback was: Beautiful atmosphere and wonderful vegan options!`
 */
-function getReviewByIndex(reviews, index) {
-  /* code here */
-}
+// function getReviewByIndex(reviews, index) {
+//   /* code here */
+//   return `${reviews[index].name} gave the restaurant a ${reviews[index].rating} star review and their feedback was: ${reviews[index].feedback}`;
+// }
+// console.log(getReviewByIndex(reviews, 0));
 
+function getReviewByIndex(reviews, index) {
+  return `${reviews[index].name} gave the restaurant a ${reviews[index].rating} star review and their feedback was: ${reviews[index].feedback}`;
+}
+console.log(getReviewByIndex(reviews, 0));
 /* Task 7: Write a function to get information about the most recent review called `getLastReview`
 
 getLastReview should accept:
@@ -103,10 +129,14 @@ and should return a string in the format `name} gave the restaurant a {rating}, 
 
 For example, if getLastReview is invoked passing the reviews array it will return `Reyna gave the restaurant a 3.5 star review and their feedback was: "this place is chill with really cool people, great for getting work done on weekdays"`.
 */
-function getLastReview(/* code here */) {
-  /* code here */
-}
 
+function getLastReview(rev) {
+  /* code here */
+  return `${rev[rev.length - 1].name} gave the restaurant a ${
+    rev[rev.length - 1].rating
+  }, and their feedback was: ${rev[rev.length - 1].feedbacj}`;
+}
+console.log(getLastReview(reviews));
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
 
 /** STRETCH 1: Write a function called `getReviewByRating` that returns an array containing all reviews in a certain range. Your function should accept: 
